@@ -4,7 +4,6 @@ This folder contains the static HTML, CSS, and JavaScript files for the AI Bias 
 
 ## Structure
 - `index.html` — Home page
-- `about.html` — About page
 - `analyze.html` — Analyze page (with real JS-based bias analysis)
 - `css/style.css` — Custom styles
 - `js/analyze.js` — JavaScript for bias analysis
@@ -17,3 +16,4 @@ This folder contains the static HTML, CSS, and JavaScript files for the AI Bias 
 ---
 
 All analysis is performed client-side using JavaScript. No data is sent to any server.
+
