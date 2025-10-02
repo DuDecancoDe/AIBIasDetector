@@ -1,4 +1,4 @@
-# Is It Biased? Static Site
+# Is It Biased?
 
 This folder contains the static HTML, CSS, and JavaScript files for the AI Bias Detector, ready for deployment to GitHub Pages.
 
@@ -17,3 +17,4 @@ This folder contains the static HTML, CSS, and JavaScript files for the AI Bias 
 ---
 
 All analysis is performed by Gemini.
+
