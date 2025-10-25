@@ -1,0 +1,235 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="text-center mb-5">
+                <h1 class="display-4 fw-bold text-primary">{{ title }}</h1>
+                <p class="lead text-muted">Paste article text for advanced AI-powered bias analysis using multiple AI models</p>
+                
+                <!-- Legal Disclaimer -->
+                <div class="alert alert-warning mt-3" role="alert">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <strong>Legal Disclaimer:</strong> This tool provides AI-generated analysis for educational and research purposes only. 
+                    Results are not legal advice and should not be used to make defamatory statements. 
+                    Users are responsible for their own interpretation and use of these results.
+                </div>
+            </div>
+
+            {% if error %}
+            <div class="alert alert-danger" role="alert">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                {{ error }}
+            </div>
+            {% endif %}
+
+            {% if not bias_analysis %}
+            <!-- Analysis Form -->
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-5">
+                    <form method="POST" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        <div class="mb-4">
+                            <label for="text_content" class="form-label fw-bold">Article Text</label>
+                            <textarea class="form-control form-control-lg" id="text_content" name="text_content" 
+                                      rows="8" placeholder="Paste or type the article text you want to analyze for bias..." required></textarea>
+                            <div class="form-text">Paste the article text directly into this box for analysis</div>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-brain me-2"></i>
+                                Analyze with AI
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- AI Models Info -->
+            <div class="mt-5">
+                <h3 class="text-center mb-4">AI Models Used</h3>
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-3 text-center">
+                        <div class="p-3">
+                            <i class="fas fa-robot fa-3x text-dark mb-3"></i>
+                            <h5>TextBlob NLP</h5>
+                            <p class="text-muted">Sentiment and subjectivity analysis</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 text-center">
+                        <div class="p-3">
+                            <i class="fas fa-search fa-3x text-dark mb-3"></i>
+                            <h5>Advanced Keywords</h5>
+                            <p class="text-muted">Pattern recognition and bias indicators</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 text-center">
+                        <div class="p-3">
+                            <i class="fas fa-brain fa-3x text-dark mb-3"></i>
+                            <h5>OpenAI GPT</h5>
+                            <p class="text-muted">Large language model analysis</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 text-center">
+                        <div class="p-3">
+                            <i class="fas fa-cogs fa-3x text-dark mb-3"></i>
+                            <h5>Transformers</h5>
+                            <p class="text-muted">Hugging Face model analysis</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <!-- AI Analysis Results -->
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">
+                        <i class="fas fa-chart-line me-2"></i>
+                        AI Bias Analysis Results
+                    </h3>
+                </div>
+                <div class="card-body p-5">
+                    <div class="mb-4">
+                        <h5>Analyzed Text:</h5>
+                        <div class="bg-light p-3 rounded">
+                            <p class="mb-0">{{ text_preview }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Overall Results -->
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <div class="text-center p-4 bg-light rounded">
+                                <h2 class="display-4 fw-bold text-primary">{{ bias_analysis.overall_score|floatformat:1 }}%</h2>
+                                <p class="text-muted mb-0">Overall Bias Score</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center p-4 bg-light rounded">
+                                <h4 class="fw-bold text-dark">
+                                    {{ bias_analysis.bias_level }}
+                                </h4>
+                                <p class="text-muted mb-0">Bias Level</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center p-4 bg-light rounded">
+                                <h4 class="fw-bold text-dark">{{ bias_analysis.confidence|floatformat:1 }}</h4>
+                                <p class="text-muted mb-0">AI Confidence</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Models Used -->
+                    <div class="mb-4">
+                        <h5>AI Models Used:</h5>
+                        <div class="d-flex flex-wrap gap-2">
+                            {% for model in ai_models_used %}
+                            <span class="badge bg-primary">{{ model }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Recommendations -->
+                    <div class="mb-4">
+                        <h5>AI Recommendations:</h5>
+                        {% for recommendation in bias_analysis.recommendations %}
+                        <div class="alert alert-info" role="alert">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            {{ recommendation }}
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Detailed AI Analysis -->
+                    <div class="mb-4">
+                        <h5>Detailed AI Analysis:</h5>
+                        
+                        {% if bias_analysis.detailed_analysis.sentiment %}
+                        <div class="card border-0 bg-light mb-3">
+                            <div class="card-body">
+                                <h6 class="card-title">
+                                    <i class="fas fa-heart text-dark me-2"></i>
+                                    TextBlob Sentiment Analysis
+                                </h6>
+                                <p class="card-text">{{ bias_analysis.detailed_analysis.sentiment.description }}</p>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <small class="text-muted">Polarity: {{ bias_analysis.detailed_analysis.sentiment.polarity|floatformat:2 }}</small>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <small class="text-muted">Subjectivity: {{ bias_analysis.detailed_analysis.sentiment.subjectivity|floatformat:2 }}</small>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <small class="text-muted">Bias Score: {{ bias_analysis.detailed_analysis.sentiment.bias_score|floatformat:1 }}%</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if bias_analysis.detailed_analysis.keyword_analysis %}
+                        <div class="card border-0 bg-light mb-3">
+                            <div class="card-body">
+                                <h6 class="card-title">
+                                    <i class="fas fa-search text-dark me-2"></i>
+                                    Advanced Keyword Analysis
+                                </h6>
+                                <p class="card-text">{{ bias_analysis.detailed_analysis.keyword_analysis.description }}</p>
+                                <small class="text-muted">Bias Score: {{ bias_analysis.detailed_analysis.keyword_analysis.bias_score|floatformat:1 }}%</small>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if bias_analysis.detailed_analysis.openai_analysis %}
+                        <div class="card border-0 bg-light mb-3">
+                            <div class="card-body">
+                                <h6 class="card-title">
+                                    <i class="fas fa-brain text-dark me-2"></i>
+                                    OpenAI GPT Analysis
+                                </h6>
+                                <p class="card-text">{{ bias_analysis.detailed_analysis.openai_analysis.analysis }}</p>
+                                <small class="text-muted">Bias Score: {{ bias_analysis.detailed_analysis.openai_analysis.bias_score|floatformat:1 }}%</small>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if bias_analysis.detailed_analysis.transformers_analysis %}
+                        <div class="card border-0 bg-light mb-3">
+                            <div class="card-body">
+                                <h6 class="card-title">
+                                    <i class="fas fa-cogs text-dark me-2"></i>
+                                    Hugging Face Transformers
+                                </h6>
+                                <p class="card-text">{{ bias_analysis.detailed_analysis.transformers_analysis.analysis }}</p>
+                                <small class="text-muted">Bias Score: {{ bias_analysis.detailed_analysis.transformers_analysis.bias_score|floatformat:1 }}%</small>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-4">
+                        <h5>Text Preview:</h5>
+                        <div class="bg-light p-3 rounded">
+                            <p class="mb-0">{{ text_preview }}</p>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                        <a href="{% url 'main:analyze' %}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-plus me-2"></i>
+                            Analyze Another Article
+                        </a>
+                        <a href="{% url 'main:home' %}" class="btn btn-outline-secondary btn-lg">
+                            <i class="fas fa-home me-2"></i>
+                            Back to Home
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

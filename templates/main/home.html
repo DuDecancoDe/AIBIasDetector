@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container text-center">
+        <h1 class="display-4 fw-bold mb-4">{{ title }}</h1>
+        <p class="lead mb-4">{{ description }}</p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="{% url 'main:analyze' %}" class="btn btn-light btn-lg">Analyze Article</a>
+            <a href="{% url 'main:about' %}" class="btn btn-outline-light btn-lg">Learn More</a>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="display-6 fw-bold">How Our Bias Detector Works</h2>
+                <p class="lead text-muted">Advanced analysis to help you identify potential bias in news articles and content</p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card feature-card h-100 text-center p-4">
+                    <div class="card-body">
+                        <i class="fas fa-brain fa-3x text-primary mb-3"></i>
+                        <h5 class="card-title">AI-Powered Analysis</h5>
+                        <p class="card-text">Advanced natural language processing to detect bias indicators in text content.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card feature-card h-100 text-center p-4">
+                    <div class="card-body">
+                        <i class="fas fa-chart-bar fa-3x text-success mb-3"></i>
+                        <h5 class="card-title">Detailed Reports</h5>
+                        <p class="card-text">Comprehensive bias scoring with breakdowns by category and specific examples.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card feature-card h-100 text-center p-4">
+                    <div class="card-body">
+                        <i class="fas fa-shield-alt fa-3x text-info mb-3"></i>
+                        <h5 class="card-title">Privacy First</h5>
+                        <p class="card-text">Your data stays private - we don't store article content or personal information.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Bias Categories Section -->
+<section class="bg-light py-5">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="display-6 fw-bold">What We Detect</h2>
+                <p class="lead text-muted">Our system analyzes multiple types of bias indicators</p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center p-3">
+                    <i class="fas fa-heart fa-2x text-danger mb-3"></i>
+                    <h5>Emotional Language</h5>
+                    <p class="text-muted">Detects overly emotional or sensationalist words</p>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center p-3">
+                    <i class="fas fa-exclamation fa-2x text-warning mb-3"></i>
+                    <h5>Loaded Words</h5>
+                    <p class="text-muted">Identifies words that carry strong connotations</p>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center p-3">
+                    <i class="fas fa-balance-scale fa-2x text-info mb-3"></i>
+                    <h5>Subjective Qualifiers</h5>
+                    <p class="text-muted">Spots subjective judgments and opinions</p>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center p-3">
+                    <i class="fas fa-flag fa-2x text-secondary mb-3"></i>
+                    <h5>Political Indicators</h5>
+                    <p class="text-muted">Recognizes politically charged terminology</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5">
+    <div class="container text-center">
+        <h3 class="mb-4">Ready to Analyze an Article?</h3>
+        <p class="lead mb-4">Get started with our bias detection tool in just a few clicks.</p>
+        <a href="{% url 'main:analyze' %}" class="btn btn-primary btn-lg">Start Analysis</a>
+    </div>
+</section>
+{% endblock %}
+
