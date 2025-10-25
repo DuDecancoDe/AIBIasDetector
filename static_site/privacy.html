@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - AI Bias Detector</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background: var(--main-black); color: var(--main-white);">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg shadow-sm" style="background: var(--main-black); border-bottom: 3px solid var(--main-red); box-shadow: 0 2px 8px rgba(0,0,0,0.25); z-index: 100;">
+        <div class="container">
+            <a class="navbar-brand fw-bold" style="color: var(--main-red); letter-spacing: 1px; font-size: 1.5rem;" href="index.html">
+                AI Bias Detector
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="analyze.html">Analyze</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container py-5" style="max-width: 900px;">
+        <h1 class="display-5 fw-bold mb-4" style="color: var(--main-red);">Privacy Policy</h1>
+        <div class="bg-dark bg-opacity-75 p-4 rounded-3 border border-danger mb-5">
+            <ol class="text-white" style="line-height: 1.7;">
+                <li><strong>Introduction</strong><br>
+                    Welcome to AI Bias Detector. We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website AI, including any other media form, media channel, mobile website, or mobile application related or connected thereto (collectively, the "Site").
+                </li>
+                <li class="mt-3"><strong>Information We Collect</strong><br>
+                    We don’t collect your data. However, we utilize Gemini for our service. The privacy policy of Gemini and Google can be found at this link: <a href="https://policies.google.com/privacy" class="text-danger" target="_blank" rel="noopener">https://policies.google.com/privacy</a>
+                </li>
+                <li class="mt-3"><strong>How We Use Your Information</strong><br>
+                    We don’t use your information.
+                </li>
+                <li class="mt-3"><strong>How We Share Your Information</strong><br>
+                    We do not sell, trade, or otherwise transfer your personally identifiable information to outside parties. This does not include trusted third parties who assist us in operating our website, conducting our business, or servicing you, as long as those parties agree to keep this information confidential.
+                </li>
+                <li class="mt-3"><strong>Data Security</strong><br>
+                    We implement a variety of security measures to maintain the safety of your personal information when you enter, submit, or access your personal information. However, no method of transmission over the Internet or method of electronic storage is 100% secure.
+                </li>
+                <li class="mt-3"><strong>Your Rights</strong><br>
+                    You have the right to access, update, or delete your personal information at any time. You can do this by logging into your account settings or by contacting us directly.
+                </li>
+                <li class="mt-3"><strong>Children's Privacy</strong><br>
+                    Our Site is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13. If you are under 13, please do not provide any information on this Site.
+                </li>
+                <li class="mt-3"><strong>Changes to This Privacy Policy</strong><br>
+                    We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last updated" date at the top of this Privacy Policy.
+                </li>
+                <li class="mt-3"><strong>Contact Us</strong><br>
+                    If you have any questions about this Privacy Policy, please contact us at: <a href="mailto:emailforjunk1233@gmail.com" class="text-danger">emailforjunk1233@gmail.com</a>
+                </li>
+            </ol>
+            <p class="text-white-50 mt-4 mb-0"><em>Last updated: 9/20/25</em></p>
+        </div>
+        <a href="index.html" class="btn btn-danger">Back to Home</a>
+    </div>
+    <footer class="footer mt-5">
+        <div class="container">
+            <hr class="my-4">
+            <div class="text-center">
+                <p class="text-white-50">&copy; 2024 AI Bias Detector. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Fallback: simple toggler in case Bootstrap JS is not available when hosted -->
+    <script>
+        (function(){
+            try {
+                if (typeof bootstrap === 'undefined' || !bootstrap.Collapse) {
+                    console.warn('Bootstrap JS not found — using navbar toggler fallback.');
+                    document.addEventListener('click', function(e){
+                        const btn = e.target.closest('.navbar-toggler');
+                        if (!btn) return;
+                        e.preventDefault();
+                        const targetSelector = btn.getAttribute('data-bs-target') || btn.getAttribute('data-target');
+                        if (!targetSelector) return;
+                        const targetEl = document.querySelector(targetSelector);
+                        if (!targetEl) return;
+                        targetEl.classList.toggle('show');
+                    });
+                }
+            } catch (err) {
+                console.error('Navbar toggler fallback error', err);
+            }
+        })();
+    </script>
+</body>
+</html>
